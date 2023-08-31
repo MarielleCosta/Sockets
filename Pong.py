@@ -31,17 +31,18 @@ while(True):
         print(clientIP)
         break
     
-    mensagem_separada = mensagem.decode("UTF-8").split(":")
-    IP_Ping = mensagem_separada[0]
-    Port_Ping = mensagem_separada[1]
-    print('IP Ping: ', IP_Ping)
-    print('Porta Ping: ', Port_Ping)
+msg_de_ping = mensagem.decode('UTF-8').split(":")
+IP_Ping = msg_de_ping[0]
+Port_Ping = msg_de_ping[1]
+print('IP Ping: ', IP_Ping)
+print('Porta Ping: ', Port_Ping)
 
 # Cria um socket TCP
 TCP_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Conecta o socket TCP no Ping
-TCP_sock.connect((IP_Ping,Port_Ping)) 
+TCP_sock.connect((IP_Ping,int(Port_Ping))) 
+#TCP_sock.connect((endereco[0],int(Port_Ping))) 
 
 # Envia mensagem msg_de_pong
 TCP_sock.sendall(bytes(MSG_PONG, 'utf-8'))
