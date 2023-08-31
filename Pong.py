@@ -2,45 +2,49 @@ import socket
 import sys
 
 # Recebe parâmetros 
-UDP_HOST   = "127.0.0.1"
-UDP_PORT = sys.argv[1]  #Porto Pong
-msg_de_pong = sys.argv[2]   #String Pong
+HOST = 'localhost'
+PORT_PONG = int(sys.argv[1])
+MSG_PONG = sys.argv[2]
 
 # Cria um socket UDP
+# AF_INET = protocolos IPv4
+# TCP = SOCK_STREAM / UDP = SOCK_DGRAM
 UDP_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-# Liga o socket ao porto Pong
-UDP_sock.bind((UDP_HOST, UDP_PORT))
+# Liga o socket a porta Pong
+UDP_sock.bind((HOST, PORT_PONG))
 
-# Espera uma mensgaem msg_de_ping
+# UDP: Espera uma mensagem do Ping
+mensagem = ""
 while(True):
-    bytesAddressPair = UDP_sock.recvfrom(4096)
+    bytesAddressPair = UDP_sock.recvfrom(1024)
     mensagem = bytesAddressPair[0]
     endereco = bytesAddressPair[1]
 
+    clientMsg = "Mensagem do Cliente:{}".format(mensagem)
+    clientIP  = "Endereço IP Cliente:{}".format(endereco)
+    
     # Extrai mensagem recebida
     ## Mensagem recebida: IP:porta do ping
-    print(mensagem)
+    if(mensagem != ""):
+        print(clientMsg)
+        print(clientIP)
+        break
+    
     mensagem_separada = mensagem.decode("UTF-8").split(":")
     IP_Ping = mensagem_separada[0]
     Port_Ping = mensagem_separada[1]
-    print(IP_Ping)
-    print(Port_Ping)
-    
-    break
-
-# Associa o IP e a porta Ping
-TCP_HOST = IP_Ping
-TCP_PORT = Port_Ping
+    print('IP Ping: ', IP_Ping)
+    print('Porta Ping: ', Port_Ping)
 
 # Cria um socket TCP
 TCP_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Conecta o socket TCP no Ping
-TCP_sock.connect((TCP_HOST,TCP_PORT)) 
+TCP_sock.connect((IP_Ping,Port_Ping)) 
 
 # Envia mensagem msg_de_pong
-TCP_sock.sendall(str.encode(msg_de_pong))
+TCP_sock.sendall(bytes(MSG_PONG, 'utf-8'))
 
 # Fecha as conexões
 UDP_sock.close()
