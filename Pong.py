@@ -32,7 +32,7 @@ while(True):
         break
     
 msg_de_ping = mensagem.decode('UTF-8').split(":")
-IP_Ping = msg_de_ping[0]
+IP_Ping = endereco[0]
 Port_Ping = msg_de_ping[1]
 print('IP Ping: ', IP_Ping)
 print('Porta Ping: ', Port_Ping)
