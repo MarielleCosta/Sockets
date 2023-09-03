@@ -40,7 +40,7 @@ data = ""
 while True:
     data = conn.recv(1024) #Recebe mensagem
     if not data: #Verifica se acabou de receber os dados
-        print("Não há mensagens")
+        #print("Não há mais dados")
         break
     
     # Extrai mensagem recebida
