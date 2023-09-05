@@ -5,7 +5,7 @@ import sys
 END_PONG = sys.argv[1]
 PORT_PONG = int(sys.argv[2])
 PORT_PING = int(sys.argv[3])
-HOST = 'localhost'
+HOST = '0.0.0.0'
 
 # print("End Pong:", END_PONG)
 # print("Porta Pong:", PORT_PONG)
