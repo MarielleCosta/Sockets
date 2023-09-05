@@ -27,15 +27,15 @@ while(True):
     # Extrai mensagem recebida
     ## Mensagem recebida: IP:porta do ping
     if(mensagem != ""):
-        print(clientMsg)
-        print(clientIP)
+        #print(clientMsg)
+        #print(clientIP)
         break
     
 msg_de_ping = mensagem.decode('UTF-8').split(":")
 IP_Ping = endereco[0]
 Port_Ping = msg_de_ping[1]
-print('IP Ping: ', IP_Ping)
-print('Porta Ping: ', Port_Ping)
+#print('IP Ping: ', IP_Ping)
+#print('Porta Ping: ', Port_Ping)
 
 # Cria um socket TCP
 TCP_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

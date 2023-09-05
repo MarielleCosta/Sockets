@@ -24,7 +24,7 @@ TCP_sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 TCP_sock.bind((HOST, PORT_PING))
 # Prepara o socket para receber conexões
 TCP_sock.listen()
-print("Aguardando conexão do Ping...")
+#print("Aguardando conexão do Ping...")
 
 # Monta mensagem de ping e envia para o pong
 msg_de_ping = HOST + ':' + str(PORT_PING)
@@ -33,7 +33,7 @@ UDP_sock.sendto(bytes(msg_de_ping, 'UTF-8'), (END_PONG, PORT_PONG))
 
 # Prepara para aceitar a conexão TCP vinda do Pong
 conn,endereco = TCP_sock.accept()
-print("Conectado com: ", endereco)
+#print("Conectado com: ", endereco)
 
 data = ""
 # Espera pela mensagem de Pong 
@@ -44,8 +44,9 @@ while True:
         break
     
     # Extrai mensagem recebida
-    print("Mensagem Pong: ",data.decode('UTF-8'))
-    print("Tamanho mensagem: ", len(data))
+    #print("Mensagem Pong: ",data.decode('UTF-8'))
+    #print("Tamanho mensagem: ", len(data))
+    print(data.decode('UTF-8'))
 
 # Fecha as conexões
 UDP_sock.close()
